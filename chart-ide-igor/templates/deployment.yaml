@@ -27,12 +27,6 @@ spec:
       serviceAccountName: {{ include "chart-ide-igor.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-        runAsUser: 1000
-        fsGroup: 1000
-      volumes:
-      - name: disco-igor
-        persistentVolumeClaim:
-          claimName: volume-ide
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -41,19 +35,16 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: {{ .Values.service.targetPort }}
               protocol: TCP
-          volumeMounts:
-          - mountPath: /home/project
-            name: disco
+          {{- with .Values.livenessProbe }}
           livenessProbe:
-            httpGet:
-              path: /
-              port: http
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
           readinessProbe:
-            httpGet:
-              path: /
-              port: http
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
