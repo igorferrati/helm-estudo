@@ -1,6 +1,6 @@
 apiVersion: v2
 name: chart-ide-igor
-description: A Helm chart for Kubernetes
+description: meu chart de estudo
 type: application
 version: 0.1.0
 appVersion: "1.16.0"
