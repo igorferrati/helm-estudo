@@ -54,8 +54,8 @@ readinessProbe:
     port: http
 
 secret:
-  name: app-env-vars
-  data:
+  name: ""
+  data: 
     MONGO_URI: "mongodb://adfafaf"
     USERNAME: "admin"
     PASSOWORD: "password"
