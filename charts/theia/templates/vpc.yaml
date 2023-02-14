@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "theia.fullname" . }}	
+  labels:
+    {{- include "theia.labels" . | nindent 4 }}	
+spec:
+  acessModes:
+  - {{ .Values.persistence.acessModes }}            	
+  resources:
+    request:
+      storage: {{ .Values.persistence.size }}
+  storageClassName: {{ .Values.persistence.storageClassName }}
+  volumeMode: Filesystem
