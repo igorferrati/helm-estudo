@@ -39,17 +39,25 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
-  targetPort: 80
+  targetPort: 3000
 
 livenessProbe:
   httpGet:
-  path: /
-  port: http
+    path: /
+    port: http
 
 readinessProbe:
   httpGet:
-  path: /
-  port: http
+    path: /
+    port: http
+
+configMap:
+  path: /home/project/conf
+  data:
+    arquivo.config: |-
+      ambiente=dev
+      forks=15
+      etc...
 
 ingress:
   enabled: false
