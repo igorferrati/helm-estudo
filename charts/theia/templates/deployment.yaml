@@ -27,11 +27,11 @@ spec:
       {{- end }}
       serviceAccountName: {{ include "theia.serviceAccountName" . }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}      #coloca todos parametros do PodSecurity
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
-      - name: disco
-        persistentVolumeClaim:
+      - persistentVolumeClaim:
           claimName: {{ include "theia.fullname" . }}
+         name: disco
       - configMap:
           defaultMode: 509
           name: {{ include "theia.fullname" . }}
