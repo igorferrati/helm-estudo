@@ -55,9 +55,9 @@ readinessProbe:
 configMap:
   path: /home/project/conf
   data:
-    arquivo.config: |-
+     arquivo.conf: |-
       ambiente=dev
-      forks=15
+      forks=20
       etc...
 
 persistence:
